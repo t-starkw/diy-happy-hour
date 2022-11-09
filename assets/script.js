@@ -2,6 +2,8 @@
 var cocktailApiRoot = 'https://www.thecocktaildb.com/api/json/v1/1/';
 var mealApiRoot = 'https://www.themealdb.com/api/json/v1/1/';
 
+var drinkContainer = document.querySelector('#drinkContainer');
+var mealContainer = document.querySelector('#mealContainer');
 
 function fetchDrink(input) {
     var input = input
@@ -42,3 +44,5 @@ function fetchMeal(input) {
                 console.error(err);
             })
 }
+
+console.log(localStorage);
