@@ -17,7 +17,7 @@ document.getElementById('start').onclick = function() {
 
 //  dropdown list drink prompt
 
-    var form1 = document.createElement("Form1");
+    var form1 = document.createElement("form");
 
     var values = ["Vodka", "Gin", "Rum", "Tequila", "Whiskey"];
  
@@ -59,13 +59,55 @@ document.getElementById('start').onclick = function() {
 
         var createH4 = document.createElement("h4");
         createH4.setAttribute("class", "mb-3");
-        createH4.textContent = ("Give us an ingredient or a meal you have in mind, and we'll factor it into your recommendation!");
+        createH4.textContent = ("Give us an ingredient you have in mind, and we'll factor it into your recommendation!");
         container.appendChild(createH4);
 
         // food form
+        var form2 = document.createElement("form");
+
+        var input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("name", "ingredients");
+
+
+        var foodSubmit = document.createElement("input");
+        foodSubmit.setAttribute("type", "submit");
+        foodSubmit.setAttribute("value", "See My Results");
+        foodSubmit.setAttribute("class", "btn btn-primary");
+        foodSubmit.setAttribute("id", "foodSubmit");
         
+        form2.appendChild(input);
+        form2.appendChild(foodSubmit);
+     
+        document.getElementById("jumbotron").appendChild(form2);
 
+        foodSubmit.addEventListener("click", function() {
+            var foodChoice = input.value.trim();
+            console.log(foodChoice);
 
+            if (foodChoice === "") {
+                console.log("No ingredient entered")
+                window.alert("Please enter an ingredient");
+    
+            } else {
+                var options = {
+                    drinkChoice: drinkChoice,
+                    foodChoice: foodChoice,
+                }
+            }
+            console.log(options) 
+            var storeOptions = localStorage.getItem("storeOptions");
+            if (storeOptions === null) {
+                storeOptions = [];
+            } else {
+                storeOptions = JSON.parse(storeOptions);
+            }
+            storeOptions.push(options);
+            var newInput = JSON.stringify(storeOptions);
+            localStorage.setItem("storeOptions", newInput);
+            window.location.replace("rec.html");
+            
 
+        })
     })
 }
