@@ -5,8 +5,16 @@ var mealApiRoot = 'https://www.themealdb.com/api/json/v1/1/';
 var drinkContainer = document.querySelector('#drinkContainer');
 var mealContainer = document.querySelector('#mealContainer');
 
+
+var storeOptions = localStorage.getItem("storeOptions");
+storeOptions = JSON.parse(storeOptions);
+
+
+var optionIndex = storeOptions.length - 1;
+
+
 function fetchDrink(input) {
-    var input = input
+    var input = storeOptions[optionIndex].drinkChoice
     var apiUrl = `${drinkApiRoot}filter.php?i=${ input }`;
     console.log(apiUrl);
 
@@ -18,31 +26,31 @@ function fetchDrink(input) {
             .then(
                 function(drinks) {
                 console.log("DATA", drinks);
-                    randomDrink(drinks);
             })
             .catch(function(err) {
                 console.error(err);
             })
 }
 
-function fetchMeal(input) {
-    var input= input;
-    var apiUrl = `${mealApiRoot}filter.php?i=${ input }`;
-    console.log(apiUrl);
+// function fetchMeal(input) {
+//     var input= input;
+//     var apiUrl = `${mealApiRoot}filter.php?i=${ input }`;
+//     console.log(apiUrl);
 
-    fetch(apiUrl)
-        .then(
-            function(res) {
-                return res.json();
-            })
-            .then(
-                function(meals) {
-                console.log("DATA", meals);
-                randomMeal(meals)
-            })
-            .catch(function(err) {
-                console.error(err);
-            })
-}
+//     fetch(apiUrl)
+//         .then(
+//             function(res) {
+//                 return res.json();
+//             })
+//             .then(
+//                 function(meals) {
+//                 console.log("DATA", meals);
+//                 randomMeal(meals)
+//             })
+//             .catch(function(err) {
+//                 console.error(err);
+//             })
+// }
 
-console.log(localStorage);
+// console.log(storeOptions);
+// console.log(storeOptions[optionIndex].drinkChoice);

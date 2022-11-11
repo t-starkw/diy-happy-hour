@@ -3,7 +3,16 @@ var container = document.querySelector("#jumbotron");
 var start = document.querySelector("#start")
 
 
-document.getElementById('start').onclick = function() {
+var options = {};
+
+
+
+start.addEventListener("click", function() {
+
+    drinkQuestion()
+});
+
+function drinkQuestion() {
     container.innerHTML = "";
     var createH2 = document.createElement("h2");
     createH2.setAttribute("class", "mb-3");
@@ -16,9 +25,7 @@ document.getElementById('start').onclick = function() {
     container.appendChild(createH4);
 
 //  dropdown list drink prompt
-
-    var form1 = document.createElement("form");
-
+    var form = document.createElement("form");
     var values = ["Vodka", "Gin", "Rum", "Tequila", "Whiskey"];
  
     var select = document.createElement("select");
@@ -37,77 +44,80 @@ document.getElementById('start').onclick = function() {
     drinkSubmit.setAttribute("type", "submit");
     drinkSubmit.setAttribute("value", "Next");
     drinkSubmit.setAttribute("class", "btn btn-primary");
-    drinkSubmit.setAttribute("id", "submitDrink")
-  
-    form1.appendChild(select);
-    form1.appendChild(drinkSubmit);
- 
-    document.getElementById("jumbotron").appendChild(form1);
+    drinkSubmit.setAttribute("id", "submitDrink");
+    form.appendChild(select);
+    form.appendChild(drinkSubmit);
+    container.appendChild(form);
 
-// next
     drinkSubmit.addEventListener("click", function() {
         // DRINK CHOICE
         var drinkChoice = select.value;
-
         console.log(drinkChoice);
+        options['drinkChoice'] = drinkChoice;
 
-        container.innerHTML = "";
-        var createH2 = document.createElement("h2");
-        createH2.setAttribute("class", "mb-3");
-        createH2.textContent = 'Any Cravings?'
-        container.appendChild(createH2)
+        foodQuestion();
+});
+};
 
-        var createH4 = document.createElement("h4");
-        createH4.setAttribute("class", "mb-3");
-        createH4.textContent = ("Give us an ingredient you have in mind, and we'll factor it into your recommendation!");
-        container.appendChild(createH4);
+function foodQuestion() {
+    container.innerHTML = "";
+    var createH2 = document.createElement("h2");
+    createH2.setAttribute("class", "mb-3");
+    createH2.textContent = 'Any Cravings?'
+    container.appendChild(createH2)
 
-        // food form
-        var form2 = document.createElement("form");
+    var createH4 = document.createElement("h4");
+    createH4.setAttribute("class", "mb-3");
+    createH4.textContent = ("Give us an ingredient you have in mind, and we'll factor it into your recommendation!");
+    container.appendChild(createH4);
 
-        var input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("name", "ingredients");
+    // food form
+    var form = document.createElement("form");
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("name", "ingredients");
 
 
-        var foodSubmit = document.createElement("input");
-        foodSubmit.setAttribute("type", "submit");
-        foodSubmit.setAttribute("value", "See My Results");
-        foodSubmit.setAttribute("class", "btn btn-primary");
-        foodSubmit.setAttribute("id", "foodSubmit");
-        
-        form2.appendChild(input);
-        form2.appendChild(foodSubmit);
-     
-        document.getElementById("jumbotron").appendChild(form2);
-
-        foodSubmit.addEventListener("click", function() {
-            var foodChoice = input.value.trim();
-            console.log(foodChoice);
-
-            if (foodChoice === "") {
-                console.log("No ingredient entered")
-                window.alert("Please enter an ingredient");
+    var foodSubmit = document.createElement("input");
+    foodSubmit.setAttribute("type", "submit");
+    foodSubmit.setAttribute("value", "See My Results");
+    foodSubmit.setAttribute("class", "btn btn-primary");
+    foodSubmit.setAttribute("id", "foodSubmit");
     
-            } else {
-                var options = {
-                    drinkChoice: drinkChoice,
-                    foodChoice: foodChoice,
-                }
-            }
-            console.log(options) 
-            var storeOptions = localStorage.getItem("storeOptions");
-            if (storeOptions === null) {
-                storeOptions = [];
-            } else {
-                storeOptions = JSON.parse(storeOptions);
-            }
-            storeOptions.push(options);
-            var newInput = JSON.stringify(storeOptions);
-            localStorage.setItem("storeOptions", newInput);
-            window.location.replace("rec.html");
-            
+    form.appendChild(input);
+    form.appendChild(foodSubmit);
+    container.appendChild(form);
 
-        })
-    })
-}
+    foodSubmit.addEventListener("submit", function() {
+        var foodChoice = input.value.trim();
+        console.log(foodChoice);
+    
+        if (foodChoice === "") {
+            console.log("No ingredient entered")
+            window.alert("Please enter an ingredient");
+    
+        } else {
+            options['foodChoice'] = foodChoice;
+        };
+        console.log(options);
+        store(options)
+        window.location.replace('rec.html');
+
+});
+};
+
+function store(object) {
+
+    var storeOptions = localStorage.getItem("storeOptions");
+    if (storeOptions === null) {
+        storeOptions = [];
+    } else {
+        storeOptions = JSON.parse(storeOptions);
+    }
+    storeOptions.push(options);
+    var newInput = JSON.stringify(storeOptions);
+    localStorage.setItem("storeOptions", newInput);
+    console.log(localStorage);
+};
+

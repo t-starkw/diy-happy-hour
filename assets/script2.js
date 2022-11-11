@@ -10,6 +10,8 @@ var nameRec = document.querySelector('#nameRec');
 var drinkContainer = document.querySelector('#drinkContainer');
 var mealContainer = document.querySelector('#mealContainer');
 
+
+
 // event listener for search bar
 function handleSearchFormSubmit(e) {
     if (!inputName.value) {
