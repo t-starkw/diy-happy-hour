@@ -5,12 +5,12 @@ var start = document.querySelector("#start")
 
 var options = {};
 
-
-
 start.addEventListener("click", function() {
 
     drinkQuestion()
 });
+
+
 
 function drinkQuestion() {
     container.innerHTML = "";
@@ -49,14 +49,21 @@ function drinkQuestion() {
     form.appendChild(drinkSubmit);
     container.appendChild(form);
 
-    drinkSubmit.addEventListener("click", function() {
-        // DRINK CHOICE
+    function handleDrinkSubmit(e) {
         var drinkChoice = select.value;
+        if (drinkChoice == "") {
+            alert("Please select an option");
+            return;
+        } 
+        e.preventDefault();
+    
         console.log(drinkChoice);
         options['drinkChoice'] = drinkChoice;
-
+    
         foodQuestion();
-});
+    }
+
+    drinkSubmit.addEventListener('click', handleDrinkSubmit);
 };
 
 function foodQuestion() {
@@ -89,22 +96,24 @@ function foodQuestion() {
     form.appendChild(foodSubmit);
     container.appendChild(form);
 
-    foodSubmit.addEventListener("submit", function() {
+    function handleFoodSubmit(e) {
         var foodChoice = input.value.trim();
+        if (foodChoice == "") {
+            alert("Please type an ingredient");
+            return;
+        } 
+        e.preventDefault();
+
         console.log(foodChoice);
+        options['foodChoice'] = foodChoice;
     
-        if (foodChoice === "") {
-            console.log("No ingredient entered")
-            window.alert("Please enter an ingredient");
-    
-        } else {
-            options['foodChoice'] = foodChoice;
-        };
         console.log(options);
         store(options)
         window.location.replace('rec.html');
+    
+    }
 
-});
+    foodSubmit.addEventListener('click', handleFoodSubmit);
 };
 
 function store(object) {
