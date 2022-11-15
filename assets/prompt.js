@@ -75,31 +75,38 @@ function foodQuestion() {
 
     var createH4 = document.createElement("h4");
     createH4.setAttribute("class", "mb-3");
-    createH4.textContent = ("Give us an ingredient you have in mind, and we'll factor it into your recommendation!");
+    createH4.textContent = ("Select a food category!");
     container.appendChild(createH4);
 
     // food form
     var form = document.createElement("form");
-
-    var input = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.setAttribute("name", "ingredients");
-
+    var values = ["Beef", "Chicken", "Seafood", "Pasta", "Vegetarian", "Vegan", "Starter", "Side", "Dessert", "Miscellaneous" ];
+ 
+    var select = document.createElement("select");
+    select.name = "grub";
+    select.id = "grub"
+ 
+    for (const val of values)
+    {
+        var option = document.createElement("option");
+        option.value = val;
+        option.text = val.charAt(0).toUpperCase() + val.slice(1);
+        select.appendChild(option);
+    }
 
     var foodSubmit = document.createElement("input");
     foodSubmit.setAttribute("type", "submit");
-    foodSubmit.setAttribute("value", "See My Results");
+    foodSubmit.setAttribute("value", "Next");
     foodSubmit.setAttribute("class", "btn btn-primary");
-    foodSubmit.setAttribute("id", "foodSubmit");
-    
-    form.appendChild(input);
+    foodSubmit.setAttribute("id", "submitFood");
+    form.appendChild(select);
     form.appendChild(foodSubmit);
     container.appendChild(form);
 
     function handleFoodSubmit(e) {
-        var foodChoice = input.value.trim();
+        var foodChoice = select.value;
         if (foodChoice == "") {
-            alert("Please type an ingredient");
+            alert("Please select a category");
             return;
         } 
         e.preventDefault();

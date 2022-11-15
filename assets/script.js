@@ -2,8 +2,12 @@
 var cocktailApiRoot = 'https://www.thecocktaildb.com/api/json/v1/1/';
 var mealApiRoot = 'https://www.themealdb.com/api/json/v1/1/';
 
-var container = document.querySelector('#container');
-
+var drinkCard = document.querySelector('#drinkCard');
+var foodCard = document.querySelector('#foodCard');
+var drinkImg = document.querySelector('#drinkImg');
+var foodImg = document.querySelector('#foodImg');
+var drinkTitle = document.querySelector('#drinkTitle');
+var foodTitle = document.querySelector('#foodTitle');
 
 var storeOptions = localStorage.getItem("storeOptions");
 storeOptions = JSON.parse(storeOptions);
@@ -51,33 +55,20 @@ function randomDrink(object) {
 
 function appendDrink(object) {
 
-    var drinkTitle = object.strDrink;
-    var drinkImg = object.strDrinkThumb;
+    var drinkName = object.strDrink;
+    var drinkThumb = object.strDrinkThumb;
 
-    var card = document.createElement("div");
-    var thumb = document.createElement('img');
-    var cardBody = document.createElement('div');
-    var cardTitle = document.createElement('h3')
-    var cardP = document.createElement('p');
+    drinkTitle.textContent = drinkName;
+    drinkImg.setAttribute("src", drinkThumb);
 
-    card.setAttribute("class", "card");
-    thumb.setAttribute("src", drinkImg);
-    cardBody.setAttribute("class", "card-body");
-    cardTitle.setAttribute("class", "card-title");
-    cardTitle.textContent = drinkTitle;
-    cardP.setAttribute("class", "card-text");
 
-    card.appendChild(thumb, cardBody);
-    cardBody.appendChild(cardTitle, cardP);
-
-    container.append(card);
 
 };
 
 // fetch food
 function fetchMeal(input) {
     var input = input;
-    var apiUrl = `${mealApiRoot}filter.php?i=${input}`;
+    var apiUrl = `${mealApiRoot}filter.php?c=${input}`;
     console.log(apiUrl);
 
     fetch(apiUrl)
@@ -111,25 +102,11 @@ function randomMeal(object) {
 
 function appendMeal(object) {
 
-    var mealTitle = object.strMeal;
-    var mealImg = object.strMealThumb;
+    var mealName = object.strMeal;
+    var mealThumb = object.strMealThumb;
 
-    var card = document.createElement("div");
-    var thumb = document.createElement('img');
-    var cardBody = document.createElement('div');
-    var cardTitle = document.createElement('h3')
-    var cardP = document.createElement('p');
+    foodTitle.textContent = mealName;
+    foodImg.setAttribute("src", mealThumb);
 
-    card.setAttribute("class", "card");
-    thumb.setAttribute("src", mealImg);
-    cardBody.setAttribute("class", "card-body");
-    cardTitle.setAttribute("class", "card-title");
-    cardTitle.textContent = mealTitle;
-    cardP.setAttribute("class", "card-text");
-
-    card.appendChild(thumb, cardBody);
-    cardBody.appendChild(cardTitle, cardP);
-
-    container.append(card);
 
 };
