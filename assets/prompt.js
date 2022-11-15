@@ -43,7 +43,7 @@ function drinkQuestion() {
     var drinkSubmit = document.createElement("input");
     drinkSubmit.setAttribute("type", "submit");
     drinkSubmit.setAttribute("value", "Next");
-    drinkSubmit.setAttribute("class", "btn btn-primary");
+    drinkSubmit.setAttribute("class", "btn btn-outline-dark btn-sm");
     drinkSubmit.setAttribute("id", "submitDrink");
     form.appendChild(select);
     form.appendChild(drinkSubmit);
@@ -97,7 +97,7 @@ function foodQuestion() {
     var foodSubmit = document.createElement("input");
     foodSubmit.setAttribute("type", "submit");
     foodSubmit.setAttribute("value", "Next");
-    foodSubmit.setAttribute("class", "btn btn-primary");
+    foodSubmit.setAttribute("class", "btn btn-outline-dark btn-sm");
     foodSubmit.setAttribute("id", "submitFood");
     form.appendChild(select);
     form.appendChild(foodSubmit);
