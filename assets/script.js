@@ -1,4 +1,4 @@
-// Listing global variables
+
 var cocktailApiRoot = 'https://www.thecocktaildb.com/api/json/v1/1/';
 var mealApiRoot = 'https://www.themealdb.com/api/json/v1/1/';
 
@@ -17,8 +17,6 @@ console.log(storeOptions);
 var optionIndex = storeOptions.length - 1;
 console.log(optionIndex);
 
-
-// fetch drink
 function fetchDrink(input) {
     var input = input;
     var apiUrl = `${cocktailApiRoot}filter.php?i=${input}`;
@@ -42,7 +40,6 @@ function fetchDrink(input) {
 
 fetchDrink(storeOptions[optionIndex].drinkChoice);
 
-// random drink from array
 function randomDrink(object) {
     var length = object.drinks.length;
     console.log(length);
@@ -65,7 +62,6 @@ function appendDrink(object) {
 
 };
 
-// fetch food
 function fetchMeal(input) {
     var input = input;
     var apiUrl = `${mealApiRoot}filter.php?c=${input}`;
@@ -89,7 +85,6 @@ function fetchMeal(input) {
 
 fetchMeal(storeOptions[optionIndex].foodChoice);
 
-// random food from array
 function randomMeal(object) {
     var length = object.meals.length;
     console.log(length);

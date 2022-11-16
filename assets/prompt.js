@@ -78,7 +78,6 @@ function foodQuestion() {
     createH4.textContent = ("Select a food category!");
     container.appendChild(createH4);
 
-    // food form
     var form = document.createElement("form");
     var values = ["Beef", "Chicken", "Seafood", "Pasta", "Vegetarian", "Vegan", "Starter", "Side", "Dessert", "Miscellaneous" ];
  
